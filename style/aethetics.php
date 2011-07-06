@@ -284,6 +284,14 @@ $aLargeAssocArray   = array(
                     );
 
 
+$anArray = array(1, 2, 3, 'Hello', 'World', true);
+
+$anExtensiveArray = array(
+                            1, 2, 3,
+                            'Hello World', true, false,
+                            'a', 'b', 1.1, 2.2
+                   );
+
 
 $myString = 'Hello ' . 'World' . PHP_EOL;
 

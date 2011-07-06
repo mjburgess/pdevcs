@@ -29,3 +29,31 @@ class AnotherComplexVar extends AComplexVariable {
     //...
 }
 
+
+abstract class Output {
+    abstract public function getData();
+    
+    public function output() {
+        echo $this->getData();
+    }
+}
+
+class ArrayData extends Output {
+    public function getData() {
+        return array(1, 2, 3);
+    }
+}
+
+class StringData extends Output {
+    public function getData() {
+        return '1, 2, 3';
+    }
+}
+
+$a = new ArrayData();
+$s = new StringData();
+
+$a->output();
+$s->output();
+
+

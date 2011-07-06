@@ -1,0 +1,446 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>aethetics.php</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Monaco}
+pre {color: #000000; background-color: #ffffff; font-family: Monaco}
+table {color: #000000; background-color: #e9e8e2; font-family: Monaco}
+.ST1 {color: #748ab0; font-family: Monaco; font-weight: bold}
+.comment {color: #748ab0}
+.number {color: #cc7800}
+.ST0 {font-family: Monaco; font-weight: bold}
+.keyword {color: #0a0a7c}
+.PHP_VARIABLE {color: #6d3206}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">/Users/mjburgess/NetBeansProjects/ApplicationDevelopment/pdevcs/style/aethetics.php</td></tr></table>
+<pre>
+<span class="ST0">&lt;?php</span>
+
+<span class="comment">/**</span>
+<span class="comment"> * Adds one to $x, by reference</span>
+<span class="comment"> * </span><span class="ST1">@param</span><span class="comment"> &amp;int $x </span>
+ <span class="comment">*/</span>
+<span class="keyword">function</span> add_one(&amp;<span class="PHP_VARIABLE">$x</span>) {
+    <span class="PHP_VARIABLE">$x</span>++;
+}
+
+<span class="keyword">function</span> pretty_print(<span class="comment">/*</span><span class="comment"> ... </span><span class="comment">*/</span>) {
+    print_r(func_get_args());
+}
+
+<span class="keyword">function</span> complex() {
+    <span class="comment">//</span><span class="comment">describe some actions</span>
+}
+
+<span class="keyword">abstract</span> <span class="keyword">class</span> DataTransferObject {
+    <span class="comment">//</span><span class="comment">prefer to keep state as private as possible</span>
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$data</span>;
+        <span class="keyword">protected</span> <span class="keyword">function</span> getData() {
+            
+        }
+        <span class="keyword">protected</span> <span class="keyword">function</span> setData(<span class="keyword">array</span> <span class="PHP_VARIABLE">$data</span>) {
+            
+        }
+}
+
+<span class="keyword">class</span> User <span class="keyword">extends</span> DataTransferObject {
+    <span class="keyword">public</span> <span class="PHP_VARIABLE">$Name</span>;
+    
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$id</span>;
+        <span class="keyword">public</span> <span class="keyword">function</span> getID() {
+            <span class="keyword">return</span> <span class="PHP_VARIABLE">$this</span>-&gt;id;
+        }
+        <span class="keyword">public</span> <span class="keyword">function</span> setID(<span class="PHP_VARIABLE">$id</span>) {
+            <span class="PHP_VARIABLE">$this</span>-&gt;id = <span class="PHP_VARIABLE">$id</span>;
+        }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> anApiFunction() {
+        
+    }
+    
+    <span class="keyword">private</span> <span class="keyword">function</span> _internalHelper() {
+        <span class="PHP_VARIABLE">$thisIsCamelCase</span> = <span class="keyword">true</span>;
+    }
+}
+
+
+<span class="keyword">class</span> Foo {
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct(Bar <span class="PHP_VARIABLE">$b</span>, <span class="keyword">array</span> <span class="PHP_VARIABLE">$a</span>) {
+        
+    }
+}
+
+<span class="keyword">interface</span> IWalkable {
+    <span class="keyword">public</span> <span class="keyword">function</span> walk();
+}
+
+<span class="keyword">interface</span> IGrowable {
+    <span class="keyword">public</span> <span class="keyword">function</span> eat();
+}
+
+<span class="keyword">abstract</span> <span class="keyword">class</span> AMamal <span class="keyword">implements</span> IGrowable {
+    <span class="keyword">public</span> <span class="keyword">function</span> eat() {
+        
+    }
+}
+
+<span class="keyword">class</span> Dog <span class="keyword">extends</span> AMamal <span class="keyword">implements</span> IWalkable {
+    <span class="keyword">public</span> <span class="keyword">function</span> walk() {
+        
+    }
+}
+
+
+<span class="keyword">const</span> MY_CONST = <span class="number">10</span>;
+
+<span class="keyword">class</span> Foo { <span class="keyword">const</span> MY_CONST = <span class="number">10</span>; }
+
+<span class="keyword">namespace</span> OD {
+    <span class="keyword">class</span> Foo {}
+}
+
+<span class="keyword">namespace</span> {
+    <span class="keyword">new</span> \OD\Foo();
+}
+
+
+<span class="keyword">namespace</span> OD;
+
+<span class="keyword">function</span> this_is_an_example(<span class="PHP_VARIABLE">$argument_one</span>, <span class="PHP_VARIABLE">$argument_two</span>) {
+    <span class="keyword">return</span> <span class="PHP_VARIABLE">$argument_one</span> * <span class="PHP_VARIABLE">$argument_two</span>;
+}
+
+
+<span class="keyword">namespace</span> OD\Alpha\Beta\Gamma\Delta;
+
+
+<span class="comment">/**</span>
+<span class="comment">* Summary of Intention (what the file provides and why)</span>
+<span class="comment">*</span>
+<span class="comment">* </span><span class="ST1">@package</span><span class="comment">    \OD\Routing </span>
+<span class="comment">* </span><span class="ST1">@subpackage</span><span class="comment"> Exceptions</span>
+<span class="comment">* </span><span class="ST1">@copyright</span><span class="comment">  Copyright (c)  Orange Digital Ltd</span>
+<span class="comment">* </span><span class="ST1">@version</span><span class="comment">    OD Framework 1.0</span>
+<span class="comment">* </span><span class="ST1">@link</span><span class="comment">       http://documentation.link</span>
+<span class="comment">*/</span>
+<span class="keyword">namespace</span> OD\Routing\Exceptions;
+
+<span class="keyword">use</span> OD\Routing\Destination;
+
+<span class="comment">/**</span>
+<span class="comment"> * Exception representing a missing destination </span>
+ <span class="comment">*/</span>
+<span class="keyword">class</span> RoutingException <span class="keyword">extends</span> \Exception {
+    <span class="comment">/**</span>
+<span class="comment">     * The destination at which the error occured</span>
+<span class="comment">     * </span><span class="ST1">@var</span><span class="comment"> \OD\Routing\Destination </span>
+     <span class="comment">*/</span>
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$destination</span>;
+        <span class="comment">/**</span>
+<span class="comment">         * </span><span class="ST1">@return</span><span class="comment"> \OD\Routing\Destination </span>
+         <span class="comment">*/</span>
+        <span class="keyword">public</span> <span class="keyword">function</span> getDestination() {
+            <span class="keyword">return</span> <span class="PHP_VARIABLE">$this</span>-&gt;destination;
+        }
+    
+    <span class="comment">/**</span>
+<span class="comment">     * Save destination state and issue PHP Exception with a 404 message</span>
+<span class="comment">     * </span><span class="ST1">@param</span><span class="comment"> Destination $d </span>
+     <span class="comment">*/</span>
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct(Destination <span class="PHP_VARIABLE">$d</span>) {
+        <span class="PHP_VARIABLE">$this</span>-&gt;destination = <span class="PHP_VARIABLE">$d</span>;
+        <span class="keyword">parent</span>::__construct(<span class="number">&quot;</span><span class="number">Could not reach </span><span class="PHP_VARIABLE">$d</span><span class="number">&quot;</span>, <span class="number">404</span>);
+    }
+}
+
+<span class="comment">/**</span> 
+<span class="comment"> * Checks if file exists, also searching include path which file_exists() does not do</span>
+<span class="comment"> * </span>
+<span class="comment"> * </span><span class="ST1">@param</span><span class="comment"> string $filename</span>
+<span class="comment"> * </span><span class="ST1">@return</span><span class="comment"> boolean </span>
+ <span class="comment">*/</span>
+<span class="keyword">function</span> find_file(<span class="PHP_VARIABLE">$filename</span>) {
+    <span class="comment">//</span><span class="comment">open file and check include path</span>
+    <span class="PHP_VARIABLE">$handle</span> = fopen(<span class="PHP_VARIABLE">$filename</span>, <span class="number">&#39;r&#39;</span>, <span class="keyword">true</span>);
+    
+    <span class="keyword">if</span> (<span class="PHP_VARIABLE">$handle</span> === <span class="keyword">false</span>) {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    } <span class="keyword">else</span> {
+        fclose(<span class="PHP_VARIABLE">$handle</span>);
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+}
+
+<span class="comment">/**</span>
+<span class="comment"> * Checks if file exists</span>
+ <span class="comment">*/</span>
+<span class="keyword">function</span> find_file(<span class="PHP_VARIABLE">$filename</span>) {
+    <span class="comment">//</span><span class="comment">open file with read permissions</span>
+    <span class="PHP_VARIABLE">$handle</span> = fopen(<span class="PHP_VARIABLE">$filename</span>, <span class="number">&#39;r&#39;</span>, <span class="keyword">true</span>);
+    <span class="comment">//</span><span class="comment">if file has failed to open </span>
+    <span class="keyword">if</span> (<span class="PHP_VARIABLE">$handle</span> === <span class="keyword">false</span>) { <span class="keyword">return</span> <span class="keyword">false</span>; } 
+    <span class="keyword">else</span> { <span class="comment">//</span><span class="comment">close file link</span>
+        fclose(<span class="PHP_VARIABLE">$handle</span>); <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+}
+
+
+<span class="keyword">class</span> Foo {
+    <span class="keyword">public</span> <span class="keyword">function</span> count() {
+        <span class="PHP_VARIABLE">$targetTime</span> = microtime(<span class="keyword">true</span>) + <span class="number">10</span>; <span class="comment">//</span><span class="comment">now + 10ms</span>
+        
+        <span class="PHP_VARIABLE">$i</span> = <span class="number">0</span>;
+        <span class="keyword">while</span>(<span class="keyword">true</span>) {
+            <span class="keyword">if</span>(microtime(<span class="keyword">true</span>) == <span class="PHP_VARIABLE">$targetTime</span>) {
+                <span class="keyword">break</span>;
+            } <span class="keyword">else</span> {
+                <span class="keyword">echo</span> <span class="PHP_VARIABLE">$i</span>++, PHP_EOL;
+            }
+        }
+        
+        <span class="PHP_VARIABLE">$this</span>-&gt;_reduceFat();
+    }
+    
+    <span class="keyword">private</span> <span class="keyword">function</span> _reduceFat() {
+        <span class="PHP_VARIABLE">$shoppingList</span> = <span class="keyword">array</span>(<span class="number">&#39;Milk&#39;</span>, <span class="number">&#39;Honey&#39;</span>, <span class="number">&#39;Eggs&#39;</span>);
+        
+        <span class="PHP_VARIABLE">$listSize</span>     = count(<span class="PHP_VARIABLE">$shoppingList</span>);
+        <span class="PHP_VARIABLE">$newList</span>      = <span class="keyword">array</span>();
+        
+        <span class="keyword">for</span>(<span class="PHP_VARIABLE">$listIndex</span> = <span class="number">0</span>; <span class="PHP_VARIABLE">$listIndex</span> &lt; <span class="PHP_VARIABLE">$listSize</span>; <span class="PHP_VARIABLE">$listIndex</span>++) {
+            <span class="PHP_VARIABLE">$newList</span>[] = <span class="number">&#39;Low Fat&#39;</span> . <span class="PHP_VARIABLE">$shoppingList</span>[<span class="PHP_VARIABLE">$i</span>];
+        }
+    }
+}
+
+
+<span class="comment">//</span><span class="comment">no</span>
+<span class="PHP_VARIABLE">$three</span> = process_step_three(
+    process_step_two(
+            process_step_one(<span class="PHP_VARIABLE">$arg_one</span>), <span class="PHP_VARIABLE">$arg_two</span>
+    ), <span class="PHP_VARIABLE">$arg_three</span>);
+
+
+<span class="comment">//</span><span class="comment">yes</span>
+<span class="PHP_VARIABLE">$one</span>   = process_step_one(<span class="PHP_VARIABLE">$arg_one</span>);
+<span class="PHP_VARIABLE">$two</span>   = process_step_two(<span class="PHP_VARIABLE">$one</span>, <span class="PHP_VARIABLE">$arg_two</span>);
+<span class="PHP_VARIABLE">$three</span> = process_step_three(<span class="PHP_VARIABLE">$two</span>, <span class="PHP_VARIABLE">$arg_three</span>);
+
+<span class="keyword">if</span>(<span class="PHP_VARIABLE">$a</span>) {
+    process_a();
+} <span class="keyword">elseif</span>(<span class="PHP_VARIABLE">$b</span>) {
+    process_b();
+} <span class="keyword">else</span> {
+    process_default();
+}
+
+
+<span class="keyword">switch</span>(<span class="PHP_VARIABLE">$int</span>) {
+    <span class="keyword">case</span> <span class="number">1</span>:
+        process_one();
+        <span class="keyword">break</span>;
+    
+    <span class="keyword">case</span> <span class="number">2</span>:
+        process_two();
+        <span class="keyword">break</span>;
+    
+    <span class="keyword">default</span>:
+        process_default();
+        <span class="keyword">break</span>;
+}
+
+<span class="keyword">switch</span>(<span class="PHP_VARIABLE">$str</span>) {
+    <span class="keyword">case</span> <span class="number">&#39;String1&#39;</span>:
+    <span class="keyword">case</span> <span class="number">&#39;String2&#39;</span>:
+        process_one_and_two();
+        
+    <span class="keyword">default</span>:
+        process_default();
+}
+
+<span class="keyword">switch</span>(<span class="PHP_VARIABLE">$bool</span>) {
+    <span class="keyword">case</span> <span class="keyword">true</span>:  process_true();    <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="keyword">false</span>: process_false();   <span class="keyword">break</span>;
+    <span class="keyword">default</span>:    process_default(); <span class="keyword">break</span>;
+}
+
+<span class="comment">//</span><span class="comment">prefer echo when not requiring print&#39;s return value</span>
+
+<span class="keyword">echo</span>  <span class="number">&#39;Hello World&#39;</span>;
+<span class="keyword">print</span> <span class="number">&#39;Hello World&#39;</span>;
+
+<span class="comment">//</span><span class="comment">use require or require_once for libraries (files containing *required* functionality)</span>
+<span class="keyword">require</span> <span class="number">&#39;a_file.php&#39;</span>;
+<span class="keyword">require_once</span> <span class="number">&#39;a_file.php&#39;</span>;
+
+<span class="comment">//</span><span class="comment">use include for files which the application can handle not having (eg. view files)</span>
+<span class="keyword">include</span> <span class="number">&#39;another_file.php&#39;</span>;
+<span class="keyword">include_once</span> <span class="number">&#39;another_file.php&#39;</span>;
+
+<span class="keyword">function</span> foo(<span class="PHP_VARIABLE">$x</span>) { 
+    <span class="keyword">return</span> <span class="PHP_VARIABLE">$x</span>;
+}
+
+<span class="comment">//</span><span class="comment">unset, isset, die, exit, empty require parens</span>
+<span class="keyword">unset</span>(<span class="PHP_VARIABLE">$foo</span>);
+<span class="keyword">isset</span>(<span class="PHP_VARIABLE">$foo</span>);
+
+<span class="comment">//</span><span class="comment">prefer die for exiting with string output and exit for integer output</span>
+<span class="keyword">die</span>(<span class="number">&#39;A message&#39;</span>);
+
+<span class="comment">//</span><span class="comment">0 for success and 1 for failure</span>
+<span class="keyword">exit</span>(<span class="number">0</span>);
+
+
+<span class="PHP_VARIABLE">$anAssociativeArray</span> = <span class="keyword">array</span>(<span class="number">&#39;message&#39;</span> =&gt; <span class="number">&#39;Hello World&#39;</span>);
+
+<span class="PHP_VARIABLE">$aLargeAssocArray</span>   = <span class="keyword">array</span>(
+                        <span class="number">&#39;message&#39;</span> =&gt; <span class="number">&#39;Hello&#39;</span>,
+                        <span class="number">&#39;to&#39;</span>      =&gt; <span class="number">&#39;World&#39;</span>
+                    );
+
+
+<span class="PHP_VARIABLE">$anArray</span> = <span class="keyword">array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">&#39;Hello&#39;</span>, <span class="number">&#39;World&#39;</span>, <span class="keyword">true</span>);
+
+<span class="PHP_VARIABLE">$anExtensiveArray</span> = <span class="keyword">array</span>(
+                            <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,
+                            <span class="number">&#39;Hello World&#39;</span>, <span class="keyword">true</span>, <span class="keyword">false</span>,
+                            <span class="number">&#39;a&#39;</span>, <span class="number">&#39;b&#39;</span>, <span class="number">1.1</span>, <span class="number">2.2</span>
+                   );
+
+
+<span class="PHP_VARIABLE">$myString</span> = <span class="number">&#39;Hello &#39;</span> . <span class="number">&#39;World&#39;</span> . PHP_EOL;
+
+<span class="PHP_VARIABLE">$anExtendedString</span> = <span class="number">&#39;thisisatest this isatest this is a test &#39;</span>
+                  . <span class="number">&#39;this is another test testing this is test &#39;</span>
+                  . <span class="number">&#39;abcdefg 1234&#39;</span>;
+
+
+<span class="PHP_VARIABLE">$stringLiteral</span> = <span class="number">&#39;Hello World!&#39;</span>;
+
+<span class="comment">//</span><span class="comment">yes</span>
+<span class="keyword">echo</span> <span class="number">&quot;</span><span class="number">K&amp;R&#39;s famous line </span><span class="PHP_VARIABLE">$stringLiteral</span><span class="number">&quot;</span>;
+
+<span class="comment">//</span><span class="comment">no</span>
+<span class="keyword">echo</span> <span class="number">&quot;</span><span class="number">K&amp;R&#39;s famous line </span>{<span class="PHP_VARIABLE">$stringLiteral</span>}<span class="number">&quot;</span>;
+<span class="keyword">echo</span> <span class="number">&quot;</span><span class="number">K&amp;R&#39;s famous line {lcfirst(</span><span class="PHP_VARIABLE">$stringLiteral</span><span class="number">)}</span><span class="number">&quot;</span>;
+
+
+<span class="PHP_VARIABLE">$stringLiteral</span> = <span class="number">&#39;Hello World!&#39;</span>;
+<span class="PHP_VARIABLE">$stringLiteralWithQuotes</span> = <span class="number">&quot;K&amp;R&#39;s Famous Line: Hello World!&quot;</span>;
+
+
+<span class="keyword">class</span> Example {
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct(<span class="PHP_VARIABLE">$bool</span>) {
+        <span class="keyword">if</span>(<span class="PHP_VARIABLE">$bool</span>) {
+            <span class="keyword">foreach</span>(<span class="keyword">array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) <span class="keyword">as</span> <span class="PHP_VARIABLE">$key</span> =&gt; <span class="PHP_VARIABLE">$value</span>) {
+                <span class="keyword">echo</span> <span class="number">&quot;</span><span class="PHP_VARIABLE">$key</span><span class="number"> is </span><span class="PHP_VARIABLE">$value</span><span class="number">\n</span><span class="number">&quot;</span>;
+            }
+        } <span class="keyword">else</span> {
+            <span class="keyword">while</span>(<span class="keyword">true</span>) {
+                <span class="keyword">break</span>;
+            }
+        }
+    }
+}
+
+
+<span class="keyword">class</span> Complete {
+    <span class="keyword">public</span> <span class="PHP_VARIABLE">$Name</span>; <span class="comment">//</span><span class="comment">public variables deprecated</span>
+    
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$myArray</span>;
+        <span class="keyword">public</span> <span class="keyword">function</span> getMyArray() {
+            <span class="keyword">return</span> <span class="PHP_VARIABLE">$this</span>-&gt;myArray;
+        }
+        
+        <span class="keyword">public</span> <span class="keyword">function</span> setMyArray(<span class="keyword">array</span> <span class="PHP_VARIABLE">$a</span>) {
+            <span class="PHP_VARIABLE">$this</span>-&gt;myArray = <span class="PHP_VARIABLE">$a</span>;
+        }
+        
+        <span class="keyword">public</span> <span class="keyword">function</span> registerElement(<span class="PHP_VARIABLE">$e</span>) {
+            <span class="PHP_VARIABLE">$this</span>-&gt;myArray[] = <span class="PHP_VARIABLE">$e</span>;
+        }
+        
+        <span class="keyword">public</span> <span class="keyword">function</span> unregisterElement(<span class="PHP_VARIABLE">$index</span>) {
+            uset(<span class="PHP_VARIABLE">$this</span>-&gt;myArray[<span class="PHP_VARIABLE">$index</span>]);
+        }
+        
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct() {}
+    <span class="keyword">public</span> <span class="keyword">function</span> apiOne() {}
+    <span class="keyword">public</span> <span class="keyword">function</span> apiTwo() {}
+    
+    <span class="keyword">private</span> <span class="keyword">function</span> _helperOne() {}
+    <span class="keyword">private</span> <span class="keyword">function</span> _helperTwo() {}
+}
+
+
+
+<span class="keyword">abstract</span> <span class="keyword">class</span> AFoo {
+    <span class="keyword">abstract</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> AnotherStaticMethod();
+    
+    <span class="keyword">final</span> <span class="keyword">public</span> <span class="keyword">function</span> __construct() {
+        <span class="keyword">foreach</span>(<span class="keyword">array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) <span class="keyword">as</span> <span class="PHP_VARIABLE">$index</span> =&gt; <span class="PHP_VARIABLE">$value</span>) {
+            <span class="keyword">echo</span> <span class="number">&quot;</span><span class="PHP_VARIABLE">$index</span><span class="number"> = </span><span class="PHP_VARIABLE">$value</span><span class="number">\n</span><span class="number">&quot;</span>;
+        }
+    }
+}
+
+<span class="keyword">interface</span> IFoo {
+    <span class="keyword">public</span> <span class="keyword">function</span> getVariable();
+    <span class="keyword">public</span> <span class="keyword">function</span> process();
+}
+
+<span class="keyword">class</span> Bar <span class="keyword">extends</span> AFoo <span class="keyword">implements</span> IFoo, IBar, IBaz {
+    <span class="keyword">public</span> <span class="keyword">function</span> concat() {
+        <span class="number">&#39;a&#39;</span> . <span class="number">&#39;b&#39;</span> . <span class="number">&#39;c&#39;</span>;
+    }
+    <span class="keyword">public</span> <span class="keyword">function</span> ifAndElse() {
+        <span class="keyword">if</span>(<span class="keyword">true</span>) {
+            <span class="keyword">echo</span> <span class="number">&#39;abc&#39;</span>;
+        } <span class="keyword">elseif</span>(<span class="keyword">false</span>) {
+            <span class="keyword">echo</span> <span class="number">&#39;def&#39;</span>;
+        } <span class="keyword">else</span> {
+            <span class="keyword">echo</span> <span class="number">&#39;xyz&#39;</span>;
+        }
+    }
+    <span class="keyword">public</span> <span class="keyword">function</span> switchAndCase() {
+        <span class="keyword">switch</span>(<span class="PHP_VARIABLE">$foo</span>) {
+            <span class="keyword">case</span> <span class="number">1</span>: 
+                abc();
+            <span class="keyword">case</span> <span class="number">2</span>:
+                def();
+                <span class="keyword">break</span>;
+            <span class="keyword">default</span>:
+                xyz();
+                <span class="keyword">break</span>;
+        }
+    }
+}
+
+<span class="keyword">function</span> my_helper_function(Foo <span class="PHP_VARIABLE">$f</span>) {
+    <span class="keyword">static</span> <span class="PHP_VARIABLE">$foo</span>;
+    
+    <span class="keyword">if</span>(!<span class="PHP_VARIABLE">$foo</span> <span class="keyword">instanceof</span> Foo) {
+        <span class="PHP_VARIABLE">$foo</span> = <span class="keyword">new</span> Foo(<span class="PHP_VARIABLE">$f</span>);
+    } 
+    
+    <span class="keyword">return</span> <span class="PHP_VARIABLE">$foo</span>;
+}
+
+<span class="keyword">function</span> get_op(<span class="PHP_VARIABLE">$op</span> = <span class="number">&#39;add&#39;</span>) {
+    <span class="PHP_VARIABLE">$operations</span> = <span class="keyword">array</span>(
+                            <span class="number">&#39;add&#39;</span> =&gt; <span class="keyword">function</span> (<span class="PHP_VARIABLE">$x</span>, <span class="PHP_VARIABLE">$y</span>) { <span class="PHP_VARIABLE">$x</span> * <span class="PHP_VARIABLE">$y</span>; },
+                            <span class="number">&#39;mul&#39;</span> =&gt; <span class="keyword">function</span> (<span class="PHP_VARIABLE">$x</span>, <span class="PHP_VARIABLE">$y</span>) { <span class="PHP_VARIABLE">$x</span> + <span class="PHP_VARIABLE">$y</span>; },
+                   );
+                            
+    <span class="keyword">return</span> <span class="PHP_VARIABLE">$operations</span>[<span class="PHP_VARIABLE">$op</span>];
+}
+
+</pre></body>
+</html>

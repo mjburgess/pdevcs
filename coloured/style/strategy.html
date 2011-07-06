@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>strategy.php</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Monaco}
+pre {color: #000000; background-color: #ffffff; font-family: Monaco}
+table {color: #000000; background-color: #e9e8e2; font-family: Monaco}
+.ST0 {font-family: Monaco; font-weight: bold}
+.keyword {color: #0a0a7c}
+.PHP_VARIABLE {color: #6d3206}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">/Users/mjburgess/NetBeansProjects/ApplicationDevelopment/pdevcs/concepts/patterns/strategy.php</td></tr></table>
+<pre>
+<span class="ST0">&lt;?php</span>
+<span class="keyword">interface</span> IOutputStrategy {
+    <span class="keyword">public</span> <span class="keyword">function</span> prepare(<span class="PHP_VARIABLE">$mixed</span>);
+    <span class="keyword">public</span> <span class="keyword">function</span> write(<span class="PHP_VARIABLE">$string</span>);
+}
+
+<span class="keyword">class</span> PrintrStrategy {
+    <span class="keyword">public</span> <span class="keyword">function</span> prepare(<span class="PHP_VARIABLE">$string</span>) {
+        <span class="keyword">return</span> print_r(<span class="PHP_VARIABLE">$string</span>, <span class="keyword">true</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> write(<span class="PHP_VARIABLE">$string</span>) {
+        <span class="keyword">echo</span> <span class="PHP_VARIABLE">$string</span>;
+    }
+}
+
+<span class="keyword">class</span> VardumpStrategy <span class="keyword">implements</span> IOutputStrategy {
+    <span class="keyword">public</span> <span class="keyword">function</span> prepare(<span class="PHP_VARIABLE">$string</span>) {
+        <span class="keyword">return</span> var_export(<span class="PHP_VARIABLE">$string</span>, <span class="keyword">true</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> write(<span class="PHP_VARIABLE">$string</span>) {
+        <span class="keyword">echo</span> <span class="PHP_VARIABLE">$string</span>;
+    }
+}
+
+<span class="keyword">class</span> PrettyPrint {
+    <span class="keyword">public</span> <span class="keyword">function</span> write(IOutputStrategy <span class="PHP_VARIABLE">$o</span>, <span class="PHP_VARIABLE">$mixed</span>) {
+        <span class="PHP_VARIABLE">$string</span> = <span class="PHP_VARIABLE">$o</span>-&gt;prepare(<span class="PHP_VARIABLE">$mixed</span>);
+        <span class="PHP_VARIABLE">$o</span>-&gt;write(<span class="PHP_VARIABLE">$string</span>);
+    }
+}
+
+<span class="PHP_VARIABLE">$p</span> = <span class="keyword">new</span> PrettyPrint();
+<span class="PHP_VARIABLE">$p</span>-&gt;write(<span class="keyword">new</span> VardumpStrategy(), <span class="PHP_VARIABLE">$p</span>);
+
+</pre></body>
+</html>

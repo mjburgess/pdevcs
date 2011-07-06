@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>dependency.php</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Monaco}
+pre {color: #000000; background-color: #ffffff; font-family: Monaco}
+table {color: #000000; background-color: #e9e8e2; font-family: Monaco}
+.comment {color: #748ab0}
+.number {color: #cc7800}
+.ST0 {font-family: Monaco; font-weight: bold}
+.keyword {color: #0a0a7c}
+.PHP_VARIABLE {color: #6d3206}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">/Users/mjburgess/NetBeansProjects/ApplicationDevelopment/pdevcs/concepts/problems/dependency.php</td></tr></table>
+<pre>
+<span class="ST0">&lt;?php</span>
+
+
+
+<span class="keyword">class</span> HiddenDependency {
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> Message() {
+        <span class="keyword">return</span> <span class="number">&#39;Hello World&#39;</span>;
+    }
+}
+
+<span class="keyword">class</span> Requests {
+    <span class="keyword">public</span> <span class="keyword">function</span> say() {
+        <span class="keyword">echo</span> HiddenDependency::Message();
+    }
+}
+
+
+<span class="keyword">class</span> EntryPoint {
+    <span class="keyword">public</span> <span class="keyword">function</span> dispatch(<span class="PHP_VARIABLE">$request</span>) {
+        <span class="PHP_VARIABLE">$requestClass</span> = <span class="keyword">new</span> Requests();
+        <span class="PHP_VARIABLE">$requestClass</span>-&gt;<span class="PHP_VARIABLE">$request</span>();
+    }
+}
+
+<span class="PHP_VARIABLE">$e</span> = <span class="keyword">new</span> EntryPoint();
+<span class="PHP_VARIABLE">$e</span>-&gt;dispatch(<span class="number">&#39;say&#39;</span>);
+
+
+<span class="comment">//</span><span class="comment">modfiy the achitecture appropriately (Request and Entry)</span>
+
+<span class="keyword">class</span> Requests {
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$dependency</span>;
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct(HiddenDependency <span class="PHP_VARIABLE">$h</span>) {
+        <span class="PHP_VARIABLE">$this</span>-&gt;_dependency = <span class="PHP_VARIABLE">$h</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> say() {
+        <span class="keyword">echo</span> <span class="PHP_VARIABLE">$this</span>-&gt;dependency-&gt;Message();
+    }
+}
+
+<span class="keyword">class</span> BetterEntry {
+    <span class="keyword">public</span> <span class="keyword">function</span> dispatch(<span class="PHP_VARIABLE">$request</span>) {
+        <span class="PHP_VARIABLE">$r</span> = <span class="keyword">new</span> Requests(<span class="keyword">new</span> HiddenDependency());
+        <span class="PHP_VARIABLE">$r</span>-&gt;<span class="PHP_VARIABLE">$request</span>();
+    }    
+}
+
+<span class="PHP_VARIABLE">$e</span> = <span class="keyword">new</span> EntryPoint();
+<span class="PHP_VARIABLE">$e</span>-&gt;dispatch(<span class="number">&#39;say&#39;</span>);
+
+
+<span class="keyword">class</span> BestEntry {
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$requests</span>;
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct(Requests <span class="PHP_VARIABLE">$r</span>) {
+        <span class="PHP_VARIABLE">$this</span>-&gt;requests = <span class="PHP_VARIABLE">$r</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> dispatch(<span class="PHP_VARIABLE">$request</span>) {
+        <span class="PHP_VARIABLE">$this</span>-&gt;requests-&gt;<span class="PHP_VARIABLE">$request</span>();
+    }
+}
+
+<span class="comment">//</span><span class="comment">bootstrapping</span>
+<span class="PHP_VARIABLE">$r</span> = <span class="keyword">new</span> Requests(<span class="keyword">new</span> HiddenDependency());
+
+<span class="PHP_VARIABLE">$e</span> = <span class="keyword">new</span> EntryPoint(<span class="PHP_VARIABLE">$r</span>);
+<span class="PHP_VARIABLE">$e</span>-&gt;dispatch(<span class="number">&#39;say&#39;</span>);
+
+<span class="keyword">class</span> X { 
+    <span class="keyword">public</span> <span class="keyword">function</span> say() { <span class="keyword">echo</span> <span class="number">&#39;Hello World&#39;</span>; }     
+}
+
+<span class="comment">//</span><span class="comment">case 1</span>
+<span class="keyword">class</span> Y <span class="keyword">extends</span> X {
+    <span class="keyword">public</span> <span class="keyword">function</span> sayNoMore() { <span class="PHP_VARIABLE">$this</span>-&gt;say() . <span class="number">&#39; ... no more!&#39;</span>; }
+}
+
+<span class="comment">//</span><span class="comment">case 2</span>
+<span class="keyword">class</span> Y {
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$x</span>;
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct() { <span class="PHP_VARIABLE">$this</span>-&gt;x = <span class="keyword">new</span> X(); }   
+    <span class="keyword">public</span> <span class="keyword">function</span> sayNoMore()   { <span class="PHP_VARIABLE">$this</span>-&gt;x-&gt;say() . <span class="number">&#39;... no more!&#39;</span>; }
+}
+
+<span class="comment">//</span><span class="comment">case 3</span>
+<span class="keyword">class</span> Y {
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$x</span>;
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct(X <span class="PHP_VARIABLE">$x</span>) { <span class="PHP_VARIABLE">$this</span>-&gt;x = <span class="PHP_VARIABLE">$x</span>; }   
+    <span class="keyword">public</span> <span class="keyword">function</span> sayNoMore()   { <span class="PHP_VARIABLE">$this</span>-&gt;x-&gt;say() . <span class="number">&#39;... no more!&#39;</span>; }
+}
+
+
+
+
+</pre></body>
+</html>

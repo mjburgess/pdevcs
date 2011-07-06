@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>abstract.php</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Monaco}
+pre {color: #000000; background-color: #ffffff; font-family: Monaco}
+table {color: #000000; background-color: #e9e8e2; font-family: Monaco}
+.comment {color: #748ab0}
+.number {color: #cc7800}
+.ST0 {font-family: Monaco; font-weight: bold}
+.keyword {color: #0a0a7c}
+.PHP_VARIABLE {color: #6d3206}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">/Users/mjburgess/NetBeansProjects/ApplicationDevelopment/pdevcs/concepts/advoo/abstract.php</td></tr></table>
+<pre>
+<span class="ST0">&lt;?php</span>
+<span class="keyword">interface</span> IVariable {
+    <span class="keyword">public</span> <span class="keyword">function</span> asInteger();
+}
+
+<span class="keyword">class</span> SimpleVar <span class="keyword">implements</span> IVariable {
+    <span class="keyword">public</span> <span class="keyword">function</span> asInteger() {
+        <span class="keyword">return</span> <span class="number">1</span>;
+    }
+}
+
+<span class="keyword">abstract</span> <span class="keyword">class</span> AComplexVariable <span class="keyword">implements</span> IVariable {
+    <span class="keyword">public</span> <span class="keyword">function</span> asInteger() {
+        <span class="keyword">return</span> <span class="PHP_VARIABLE">$this</span>-&gt;calculate();
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> calculate() {
+        <span class="keyword">return</span> <span class="number">9</span> * <span class="number">8</span> * <span class="number">7</span> * <span class="number">6</span>;
+    }
+}
+
+<span class="keyword">class</span> ComplexVar <span class="keyword">extends</span> AComplexVariable  {
+    <span class="keyword">public</span> <span class="keyword">function</span> asInteger() {
+        <span class="keyword">return</span> <span class="keyword">(int)</span> <span class="PHP_VARIABLE">$this</span>-&gt;calculate() / <span class="number">100</span>;
+    }
+}
+
+<span class="keyword">class</span> AnotherComplexVar <span class="keyword">extends</span> AComplexVariable {
+    <span class="comment">//</span><span class="comment">...</span>
+}
+
+
+<span class="keyword">abstract</span> <span class="keyword">class</span> Output {
+    <span class="keyword">abstract</span> <span class="keyword">public</span> <span class="keyword">function</span> getData();
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> output() {
+        <span class="keyword">echo</span> <span class="PHP_VARIABLE">$this</span>-&gt;getData();
+    }
+}
+
+<span class="keyword">class</span> ArrayData <span class="keyword">extends</span> Output {
+    <span class="keyword">public</span> <span class="keyword">function</span> getData() {
+        <span class="keyword">return</span> <span class="keyword">array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);
+    }
+}
+
+<span class="keyword">class</span> StringData <span class="keyword">extends</span> Output {
+    <span class="keyword">public</span> <span class="keyword">function</span> getData() {
+        <span class="keyword">return</span> <span class="number">&#39;1, 2, 3&#39;</span>;
+    }
+}
+
+<span class="PHP_VARIABLE">$a</span> = <span class="keyword">new</span> ArrayData();
+<span class="PHP_VARIABLE">$s</span> = <span class="keyword">new</span> StringData();
+
+<span class="PHP_VARIABLE">$a</span>-&gt;output();
+<span class="PHP_VARIABLE">$s</span>-&gt;output();
+
+
+
+
+</pre></body>
+</html>

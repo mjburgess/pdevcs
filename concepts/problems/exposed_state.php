@@ -20,7 +20,19 @@ $x->collection[] = array(1, 2, 3);
 $x->calculate();
 
 
-class _X {
+class Y {
+    public $age;
+}
+
+$y = new Y();
+$y->age = 'a12';
+
+//use age
+echo $y->age * 3;
+
+
+
+class X {
     public $Collection;
     public $BetterCollection;
     
@@ -32,7 +44,7 @@ class _X {
     }
 }
 
-$x = new _X();
+$x = new X();
 $x->BetterCollection = array(2 => array(2,3));
 $x->calcBetter();
 
@@ -52,7 +64,6 @@ class Collection {
         
 }
 
-<?php
 class User {                            //old class
     public $Name;
 }

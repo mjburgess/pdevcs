@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>mvc_basic.php</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Monaco}
+pre {color: #000000; background-color: #ffffff; font-family: Monaco}
+table {color: #000000; background-color: #e9e8e2; font-family: Monaco}
+.ST1 {color: #748ab0; font-family: Monaco; font-weight: bold}
+.comment {color: #748ab0}
+.number {color: #cc7800}
+.ST0 {font-family: Monaco; font-weight: bold}
+.keyword {color: #0a0a7c}
+.PHP_VARIABLE {color: #6d3206}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">/Users/mjburgess/NetBeansProjects/ApplicationDevelopment/pdevcs/concepts/mvc/mvc_basic.php</td></tr></table>
+<pre>
+<span class="ST0">&lt;?php</span>
+<span class="comment">/**</span>
+<span class="comment"> * Represents an internal request for routing</span>
+ <span class="comment">*/</span>
+<span class="keyword">class</span> MvcRequest {
+    <span class="comment">/**</span>
+<span class="comment">     * Immutable (per Object)</span>
+<span class="comment">     * </span><span class="ST1">@var</span><span class="comment"> string </span>
+     <span class="comment">*/</span>
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$controller</span>;
+        <span class="keyword">public</span> <span class="keyword">function</span> getController() {
+            <span class="keyword">return</span> <span class="PHP_VARIABLE">$this</span>-&gt;controller;
+        }
+        
+    <span class="comment">/**</span>
+<span class="comment">     * Immutable (per Object)</span>
+<span class="comment">     * </span><span class="ST1">@var</span><span class="comment"> string </span>
+     <span class="comment">*/</span>
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$action</span>;
+        <span class="keyword">public</span> <span class="keyword">function</span> getAction() {
+            <span class="keyword">return</span> <span class="PHP_VARIABLE">$this</span>-&gt;action;
+        }
+        
+    <span class="comment">/**</span>
+<span class="comment">     * Initialize Request</span>
+<span class="comment">     * </span>
+<span class="comment">     * </span><span class="ST1">@param</span><span class="comment"> string $controller    Controller Name</span>
+<span class="comment">     * </span><span class="ST1">@param</span><span class="comment"> string $action        Method Name</span>
+     <span class="comment">*/</span>
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct(<span class="PHP_VARIABLE">$controller</span>, <span class="PHP_VARIABLE">$action</span>) {
+        <span class="PHP_VARIABLE">$this</span>-&gt;controller = <span class="PHP_VARIABLE">$controller</span>;
+        <span class="PHP_VARIABLE">$this</span>-&gt;action     = <span class="PHP_VARIABLE">$action</span>;
+    }
+    
+    <span class="comment">/**</span>
+<span class="comment">     * Factory, returns MvcRequest composed from a / seperated string (Controller/Action)</span>
+<span class="comment">     * </span>
+<span class="comment">     * </span><span class="ST1">@param</span><span class="comment"> string $requestString</span>
+<span class="comment">     * </span><span class="ST1">@return</span><span class="comment"> MvcRequest </span>
+     <span class="comment">*/</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> FromString(<span class="PHP_VARIABLE">$requestString</span>) {
+        <span class="keyword">list</span>(<span class="PHP_VARIABLE">$controller</span>, <span class="PHP_VARIABLE">$action</span>) = explode(<span class="number">&#39;/&#39;</span>, <span class="PHP_VARIABLE">$requestString</span>);
+        
+        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">self</span>(<span class="PHP_VARIABLE">$controller</span>, <span class="PHP_VARIABLE">$action</span>);
+    }
+}
+
+<span class="comment">/**</span>
+<span class="comment"> * Entry point for application</span>
+ <span class="comment">*/</span>
+<span class="keyword">class</span> Application {
+    <span class="comment">/**</span>
+<span class="comment">     * Dispatchs to controller method, selected based on $request</span>
+<span class="comment">     * </span>
+<span class="comment">     * </span><span class="ST1">@param</span><span class="comment"> MvcRequest $request </span>
+     <span class="comment">*/</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> dispatch(MvcRequest <span class="PHP_VARIABLE">$request</span>) {
+        <span class="PHP_VARIABLE">$controller</span> = <span class="PHP_VARIABLE">$request</span>-&gt;getController();
+        <span class="PHP_VARIABLE">$controller</span> = <span class="keyword">new</span> <span class="PHP_VARIABLE">$controller</span>;
+        <span class="PHP_VARIABLE">$controller</span>-&gt;{<span class="PHP_VARIABLE">$request</span>-&gt;getAction()}();
+    }
+}
+
+<span class="comment">/**</span>
+<span class="comment"> * Blog controller</span>
+ <span class="comment">*/</span>
+<span class="keyword">class</span> Blog {
+    <span class="comment">/**</span>
+<span class="comment">     * Dummy function, issues &#39;Hello World&#39;</span>
+     <span class="comment">*/</span>
+    <span class="keyword">public</span> <span class="keyword">function</span> post() {
+        <span class="keyword">echo</span> <span class="number">&#39;Hello World!&#39;</span>;
+    }
+}
+
+<span class="comment">//</span><span class="comment">Form 1 (Prefered)</span>
+Application::dispatch(MvcRequest::FromString(<span class="number">&#39;Blog/post&#39;</span>));
+
+<span class="comment">//</span><span class="comment">Form 2</span>
+<span class="PHP_VARIABLE">$a</span> = <span class="keyword">new</span> Application();
+<span class="PHP_VARIABLE">$r</span> = MvcRequest::FromString(<span class="number">&#39;Blog/Post&#39;</span>);
+
+<span class="PHP_VARIABLE">$a</span>-&gt;dispatch(<span class="PHP_VARIABLE">$r</span>);
+
+</pre></body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>exposed_state.php</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Monaco}
+pre {color: #000000; background-color: #ffffff; font-family: Monaco}
+table {color: #000000; background-color: #e9e8e2; font-family: Monaco}
+.comment {color: #748ab0}
+.number {color: #cc7800}
+.ST0 {font-family: Monaco; font-weight: bold}
+.keyword {color: #0a0a7c}
+.PHP_VARIABLE {color: #6d3206}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">/Users/mjburgess/NetBeansProjects/ApplicationDevelopment/pdevcs/concepts/problems/exposed_state.php</td></tr></table>
+<pre>
+<span class="ST0">&lt;?php</span>
+<span class="comment">//</span><span class="comment">The problem of public state</span>
+
+<span class="keyword">class</span> X {
+    <span class="keyword">public</span> <span class="PHP_VARIABLE">$Collection</span>;
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct() {
+        <span class="PHP_VARIABLE">$this</span>-&gt;Collection = <span class="keyword">array</span>();
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> calculate() {
+        <span class="keyword">foreach</span>(<span class="PHP_VARIABLE">$this</span>-&gt;Collection <span class="keyword">as</span> <span class="PHP_VARIABLE">$c</span>) {
+            <span class="keyword">echo</span> array_sum(<span class="PHP_VARIABLE">$c</span>);
+        }
+    }
+}
+
+<span class="PHP_VARIABLE">$x</span> = <span class="keyword">new</span> X();
+<span class="PHP_VARIABLE">$x</span>-&gt;collection[] = <span class="keyword">array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);
+<span class="PHP_VARIABLE">$x</span>-&gt;calculate();
+
+
+<span class="keyword">class</span> Y {
+    <span class="keyword">public</span> <span class="PHP_VARIABLE">$age</span>;
+}
+
+<span class="PHP_VARIABLE">$y</span> = <span class="keyword">new</span> Y();
+<span class="PHP_VARIABLE">$y</span>-&gt;age = <span class="number">&#39;a12&#39;</span>;
+
+<span class="comment">//</span><span class="comment">use age</span>
+<span class="keyword">echo</span> <span class="PHP_VARIABLE">$y</span>-&gt;age * <span class="number">3</span>;
+
+
+
+<span class="keyword">class</span> X {
+    <span class="keyword">public</span> <span class="PHP_VARIABLE">$Collection</span>;
+    <span class="keyword">public</span> <span class="PHP_VARIABLE">$BetterCollection</span>;
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> calculate() { <span class="comment">/*</span><span class="comment">...</span><span class="comment">*/</span> }
+    <span class="keyword">public</span> <span class="keyword">function</span> calcBetter() {
+        <span class="keyword">foreach</span> (<span class="PHP_VARIABLE">$this</span>-&gt;BetterCollection <span class="keyword">as</span> <span class="PHP_VARIABLE">$adder</span> =&gt; <span class="PHP_VARIABLE">$sumArray</span>) {
+            <span class="keyword">echo</span> array_sum(<span class="PHP_VARIABLE">$sumArray</span>) + <span class="PHP_VARIABLE">$adder</span>;
+        }
+    }
+}
+
+<span class="PHP_VARIABLE">$x</span> = <span class="keyword">new</span> X();
+<span class="PHP_VARIABLE">$x</span>-&gt;BetterCollection = <span class="keyword">array</span>(<span class="number">2</span> =&gt; <span class="keyword">array</span>(<span class="number">2</span>,<span class="number">3</span>));
+<span class="PHP_VARIABLE">$x</span>-&gt;calcBetter();
+
+<span class="keyword">class</span> Collection {
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$data</span>;
+        <span class="keyword">public</span> <span class="keyword">function</span> getData() {
+            <span class="keyword">return</span> <span class="PHP_VARIABLE">$this</span>-&gt;data;
+        }
+        
+        <span class="keyword">public</span> <span class="keyword">function</span> register(<span class="PHP_VARIABLE">$integer</span>) {
+            <span class="keyword">if</span>(!is_int(<span class="PHP_VARIABLE">$integer</span>)) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="number">&#39;Can only register integers!&#39;</span>);
+            }
+            
+            <span class="PHP_VARIABLE">$this</span>-&gt;data[] = <span class="PHP_VARIABLE">$integer</span>;
+        }
+        
+}
+
+<span class="keyword">class</span> User {                            <span class="comment">//</span><span class="comment">old class</span>
+    <span class="keyword">public</span> <span class="PHP_VARIABLE">$Name</span>;
+}
+<span class="keyword">class</span> User {                            <span class="comment">//</span><span class="comment">new class</span>
+    <span class="keyword">public</span> <span class="PHP_VARIABLE">$Name</span>; <span class="comment">//</span><span class="comment">do not use!</span>
+    <span class="keyword">public</span> <span class="PHP_VARIABLE">$FirstName</span>;
+    <span class="keyword">public</span> <span class="PHP_VARIABLE">$SecondName</span>;
+}
+<span class="comment">//</span><span class="comment">compare with</span>
+<span class="keyword">class</span> User {                            <span class="comment">//</span><span class="comment">old class</span>
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$name</span>;
+        <span class="keyword">public</span>  <span class="keyword">function</span> getName() {
+            <span class="keyword">return</span> <span class="PHP_VARIABLE">$this</span>-&gt;name;
+        }
+        <span class="keyword">public</span> <span class="keyword">function</span> setName(<span class="PHP_VARIABLE">$name</span>) {
+            <span class="PHP_VARIABLE">$this</span>-&gt;name = <span class="PHP_VARIABLE">$name</span>;
+        }
+}
+<span class="keyword">class</span> User {                            <span class="comment">//</span><span class="comment">new class</span>
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$firstName</span>;
+        <span class="keyword">public</span> <span class="keyword">function</span> getFistName() {}
+        <span class="keyword">public</span> <span class="keyword">function</span> setFirstName() {}
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$secondName</span>;
+        <span class="keyword">public</span> <span class="keyword">function</span> getSecondName() {}
+        <span class="keyword">public</span> <span class="keyword">function</span> setSecondName() {}
+        
+        <span class="keyword">public</span> <span class="keyword">function</span> getName() {
+            <span class="keyword">return</span> <span class="PHP_VARIABLE">$this</span>-&gt;firstName . <span class="number">&#39; &#39;</span> . <span class="PHP_VARIABLE">$this</span>-&gt;secondName;
+        }
+}
+
+
+
+
+
+</pre></body>
+</html>

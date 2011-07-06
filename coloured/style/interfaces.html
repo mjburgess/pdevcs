@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>interfaces.php</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Monaco}
+pre {color: #000000; background-color: #ffffff; font-family: Monaco}
+table {color: #000000; background-color: #e9e8e2; font-family: Monaco}
+.number {color: #cc7800}
+.ST0 {font-family: Monaco; font-weight: bold}
+.keyword {color: #0a0a7c}
+.PHP_VARIABLE {color: #6d3206}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">/Users/mjburgess/NetBeansProjects/ApplicationDevelopment/pdevcs/concepts/advoo/interfaces.php</td></tr></table>
+<pre>
+<span class="ST0">&lt;?php</span>
+
+<span class="keyword">interface</span> IReadable {
+    <span class="keyword">public</span> <span class="keyword">function</span> read();
+}
+
+
+<span class="keyword">class</span> Book <span class="keyword">implements</span> IReadable {
+    <span class="keyword">public</span> <span class="keyword">function</span> read() {
+        <span class="keyword">return</span> <span class="number">&#39;Hello World!&#39;</span>;
+    }
+}
+
+<span class="keyword">function</span> read(IReadable <span class="PHP_VARIABLE">$r</span>) {
+    <span class="keyword">echo</span> <span class="number">&#39;The Readable says &#39;</span> . <span class="PHP_VARIABLE">$r</span>-&gt;read();
+}
+
+read(<span class="keyword">new</span> Book());
+
+
+
+
+</pre></body>
+</html>

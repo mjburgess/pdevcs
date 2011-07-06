@@ -86,7 +86,7 @@ class Y {
 }
 
 //case 3
-class Y {
+class Y {   
     private $x;
     public function __construct(X $x) { $this->x = $x; }   
     public function sayNoMore()   { $this->x->say() . '... no more!'; }

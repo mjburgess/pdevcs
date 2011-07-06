@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>globals.php</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Monaco}
+pre {color: #000000; background-color: #ffffff; font-family: Monaco}
+table {color: #000000; background-color: #e9e8e2; font-family: Monaco}
+.comment {color: #748ab0}
+.number {color: #cc7800}
+.ST0 {font-family: Monaco; font-weight: bold}
+.keyword {color: #0a0a7c}
+.PHP_VARIABLE {color: #6d3206}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">/Users/mjburgess/NetBeansProjects/ApplicationDevelopment/pdevcs/concepts/problems/globals.php</td></tr></table>
+<pre>
+<span class="ST0">&lt;?php</span>
+
+<span class="comment">//</span><span class="comment">The Problem of Globals</span>
+<span class="keyword">function</span> change_a() {
+    <span class="keyword">global</span> <span class="PHP_VARIABLE">$a</span>;
+    
+    <span class="PHP_VARIABLE">$a</span> = rand(<span class="number">0</span>, <span class="number">10</span>);
+}
+
+<span class="keyword">function</span> calculate(<span class="PHP_VARIABLE">$b</span>) {
+    <span class="keyword">global</span> <span class="PHP_VARIABLE">$a</span>;
+    
+    <span class="keyword">echo</span> <span class="PHP_VARIABLE">$a</span> * <span class="PHP_VARIABLE">$b</span>;
+}
+
+
+
+change_a();
+<span class="keyword">echo</span> calculate(<span class="number">3</span>);
+
+change_a();
+<span class="keyword">echo</span> calculate(<span class="number">3</span>);
+
+<span class="comment">//</span><span class="comment">A similar problem with statics and singletons</span>
+<span class="keyword">class</span> A {
+    <span class="keyword">static</span> <span class="PHP_VARIABLE">$_instance</span>;
+        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> getInstance() {
+            <span class="keyword">if</span>(!<span class="keyword">self</span>::<span class="PHP_VARIABLE">$_instance</span> <span class="keyword">instanceof</span> A) {
+                <span class="keyword">self</span>::<span class="PHP_VARIABLE">$_instance</span> = <span class="keyword">new</span> A();
+            }
+            
+            <span class="keyword">return</span> <span class="keyword">self</span>::<span class="PHP_VARIABLE">$_instance</span>;
+        }
+    
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$a</span>;
+        <span class="keyword">public</span> <span class="keyword">function</span> getA() {
+            <span class="keyword">return</span> <span class="PHP_VARIABLE">$this</span>-&gt;a;
+        }
+        <span class="keyword">public</span> <span class="keyword">function</span> change() {
+            <span class="PHP_VARIABLE">$this</span>-&gt;a = rand(<span class="number">0</span>, <span class="number">10</span>);
+        }
+}
+
+<span class="keyword">class</span> B {
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> calculate(<span class="PHP_VARIABLE">$b</span>) {
+        <span class="keyword">return</span> A::getInstance()-&gt;getA() * <span class="PHP_VARIABLE">$b</span>;
+    }
+}
+
+A::getInstance()-&gt;change();
+B::calculate(<span class="number">3</span>);
+
+A::getInstance()-&gt;change();
+B::calculate(<span class="number">3</span>);
+
+<span class="keyword">namespace</span> { 
+    <span class="keyword">class</span> X {
+        <span class="keyword">public</span> <span class="keyword">static</span> <span class="PHP_VARIABLE">$x</span>; <span class="comment">//</span><span class="comment">truely global</span>
+
+        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> global_function() {
+            <span class="keyword">self</span>::<span class="PHP_VARIABLE">$x</span> = rand(<span class="number">0</span>, <span class="number">10</span>);
+        }
+    }
+}
+
+<span class="comment">//</span><span class="comment">the solution</span>
+<span class="keyword">class</span> Subject {
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$a</span>; 
+        <span class="keyword">public</span> <span class="keyword">function</span> getA() {
+            <span class="keyword">return</span> <span class="PHP_VARIABLE">$this</span>-&gt;a;
+        }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> mutateState() {
+        <span class="PHP_VARIABLE">$this</span>-&gt;a = rand(<span class="number">0</span>, <span class="number">10</span>);
+    }
+}
+
+<span class="keyword">class</span> Consumer {
+    <span class="keyword">private</span> <span class="PHP_VARIABLE">$a</span>;
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct(Subject <span class="PHP_VARIABLE">$s</span>) {
+        <span class="PHP_VARIABLE">$this</span>-&gt;a = <span class="PHP_VARIABLE">$s</span>-&gt;getA();
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> calculate(<span class="PHP_VARIABLE">$b</span>) {
+        <span class="keyword">echo</span> <span class="PHP_VARIABLE">$this</span>-&gt;a * <span class="PHP_VARIABLE">$b</span>;
+    }
+}
+
+<span class="PHP_VARIABLE">$s</span> = <span class="keyword">new</span> Subject();
+<span class="PHP_VARIABLE">$s</span>-&gt;mutateState();
+
+<span class="PHP_VARIABLE">$c</span> = <span class="keyword">new</span> Consumer(<span class="PHP_VARIABLE">$s</span>);
+
+<span class="PHP_VARIABLE">$c</span>-&gt;calculate(<span class="number">3</span>);
+<span class="PHP_VARIABLE">$s</span>-&gt;mutateState();
+
+<span class="PHP_VARIABLE">$c</span>-&gt;calculate(<span class="number">3</span>);
+
+</pre></body>
+</html>

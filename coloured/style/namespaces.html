@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>namespaces.php</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Monaco}
+pre {color: #000000; background-color: #ffffff; font-family: Monaco}
+table {color: #000000; background-color: #e9e8e2; font-family: Monaco}
+.comment {color: #748ab0}
+.number {color: #cc7800}
+.ST0 {font-family: Monaco; font-weight: bold}
+.keyword {color: #0a0a7c}
+.PHP_VARIABLE {color: #6d3206}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">/Users/mjburgess/NetBeansProjects/ApplicationDevelopment/pdevcs/concepts/advoo/namespaces.php</td></tr></table>
+<pre>
+<span class="ST0">&lt;?php</span>
+
+<span class="comment">//</span><span class="comment">pre 5.3</span>
+<span class="keyword">class</span> OD_Folder_File {
+    <span class="keyword">public</span> <span class="keyword">function</span> api() {}
+}
+
+
+<span class="comment">//</span><span class="comment">Folder/File.php</span>
+<span class="keyword">namespace</span> OD\Folder; 
+
+<span class="keyword">class</span> File {
+    <span class="keyword">public</span> <span class="keyword">function</span> __construct() {
+        <span class="keyword">echo</span> <span class="number">&#39;Hello World!&#39;</span>;
+    }
+}
+
+
+<span class="comment">//</span><span class="comment">anyfile.php</span>
+<span class="keyword">namespace</span> OD;
+
+<span class="PHP_VARIABLE">$f</span> = <span class="keyword">new</span> Folder\File();
+
+
+<span class="comment">//</span><span class="comment">anyotherfile.php</span>
+<span class="keyword">namespace</span> OD;
+
+<span class="keyword">use</span> OD\Folder\File;
+
+<span class="PHP_VARIABLE">$f</span> = <span class="keyword">new</span> File;
+
+</pre></body>
+</html>

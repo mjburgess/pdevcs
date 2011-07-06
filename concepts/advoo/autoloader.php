@@ -2,8 +2,7 @@
 
 //PSR - 0, Final Proposal
 
-function __autoload($className)
-{
+function __autoload($className) {
     $className = ltrim($className, '\\');
     $fileName  = '';
     $namespace = '';
