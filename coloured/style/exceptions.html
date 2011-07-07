@@ -5,28 +5,57 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <style type="text/css">
 <!--
-body {color: #000000; background-color: #ffffff; font-family: Monaco}
-pre {color: #000000; background-color: #ffffff; font-family: Monaco}
-table {color: #000000; background-color: #e9e8e2; font-family: Monaco}
-.comment {color: #748ab0}
-.number {color: #cc7800}
-.ST0 {font-family: Monaco; font-weight: bold}
-.keyword {color: #0a0a7c}
+body {color: #000000; background-color: #ffffff; font-family: Monospaced}
+pre {color: #000000; background-color: #ffffff; font-family: Monospaced}
+table {color: #000000; background-color: #e9e8e2; font-family: Monospaced}
+.ST0 {font-family: Monospaced; font-weight: bold}
 .PHP_VARIABLE {color: #6d3206}
+.comment {color: #969696}
+.string {color: #ce7b00}
+.keyword {color: #0000e6}
 -->
 </style>
 </head>
 <body>
-<table width="100%"><tr><td align="center">/Users/mjburgess/NetBeansProjects/ApplicationDevelopment/pdevcs/concepts/advoo/exceptions.php</td></tr></table>
+<table width="100%"><tr><td align="center">/var/dev/pdevcs/concepts/advoo/exceptions.php</td></tr></table>
 <pre>
 <span class="ST0">&lt;?php</span>
+
+<span class="keyword">function</span> Login(<span class="PHP_VARIABLE">$pass</span>, <span class="PHP_VARIABLE">$confpass</span>) {
+    <span class="keyword">if</span>(<span class="PHP_VARIABLE">$pass</span> != <span class="PHP_VARIABLE">$confpass</span>) {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    } <span class="keyword">else</span> {
+        <span class="comment">//</span><span class="comment">auth</span>
+    }
+}
+
+<span class="keyword">function</span> GetUser() {
+    <span class="keyword">if</span>(DbHasFailed()) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&#39;Database Failure!&#39;</span>);
+    }
+}
+
+
+<span class="keyword">if</span>(Login(1, 2)) {
+    <span class="comment">//</span><span class="comment">...</span>
+} <span class="keyword">else</span> {
+    <span class="comment">//</span><span class="comment">redirect to login page</span>
+}
+
+
+<span class="keyword">try</span> {
+    GetUser();
+} <span class="keyword">catch</span> (Exception <span class="PHP_VARIABLE">$e</span>) {
+    <span class="comment">//</span><span class="comment">...gracefully exit</span>
+}
+
 
 <span class="keyword">class</span> MyException <span class="keyword">extends</span> Exception {
     
 }
 
 <span class="keyword">function</span> error_prone() {
-    <span class="keyword">if</span>(rand(<span class="number">0</span>,<span class="number">1</span>)) {
+    <span class="keyword">if</span>(rand(0,1)) {
         <span class="keyword">throw</span> <span class="keyword">new</span> MyException();
     } <span class="keyword">else</span> {
         <span class="keyword">throw</span> <span class="keyword">new</span> Exception();
@@ -39,35 +68,6 @@ table {color: #000000; background-color: #e9e8e2; font-family: Monaco}
     <span class="keyword">echo</span> <span class="PHP_VARIABLE">$e</span>-&gt;message();
 } <span class="keyword">catch</span>(Exception <span class="PHP_VARIABLE">$e</span>) {
     <span class="keyword">echo</span> <span class="PHP_VARIABLE">$e</span>-&gt;message();
-}
-
-<span class="keyword">function</span> operation(<span class="PHP_VARIABLE">$op</span>, <span class="PHP_VARIABLE">$x</span>, <span class="PHP_VARIABLE">$y</span>) {
-    <span class="keyword">if</span>(!in_array(<span class="PHP_VARIABLE">$op</span>, <span class="keyword">array</span>(<span class="number">&#39;add&#39;</span>, <span class="number">&#39;sub&#39;</span>, <span class="number">&#39;mul&#39;</span>, <span class="number">&#39;div&#39;</span>))) {
-        <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="number">&#39;You must specify a valid operation!&#39;</span>);
-    }
-    
-    <span class="comment">//</span><span class="comment">continue assuming $op is valid</span>
-    <span class="PHP_VARIABLE">$op</span>(<span class="PHP_VARIABLE">$x</span>, <span class="PHP_VARIABLE">$y</span>);
-}
-
-<span class="keyword">function</span> add(<span class="PHP_VARIABLE">$x</span>, <span class="PHP_VARIABLE">$y</span>) {
-    <span class="keyword">if</span>(!(is_int(<span class="PHP_VARIABLE">$x</span>) &amp;&amp; is_int(<span class="PHP_VARIABLE">$y</span>))) {
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    } <span class="keyword">else</span> {
-        <span class="keyword">return</span> <span class="PHP_VARIABLE">$x</span> + <span class="PHP_VARIABLE">$y</span>;
-    }
-}
-
-<span class="keyword">if</span>(add(<span class="number">&#39;a&#39;</span>, <span class="number">2</span>)) {
-    <span class="comment">//</span><span class="comment">continue</span>
-} <span class="keyword">else</span> {
-    <span class="comment">//</span><span class="comment">handle failure</span>
-}
-
-<span class="keyword">try</span> {
-    operation(<span class="number">&#39;log&#39;</span>, <span class="number">10</span>, <span class="number">3</span>);
-} <span class="keyword">catch</span>(Exception <span class="PHP_VARIABLE">$e</span>) {
-    <span class="comment">//</span><span class="comment">error reporting, handling, graceful exit of application</span>
 }
 
 </pre></body>

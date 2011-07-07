@@ -1,5 +1,34 @@
 <?php
 
+function Login($pass, $confpass) {
+    if($pass != $confpass) {
+        return false;
+    } else {
+        //auth
+    }
+}
+
+function GetUser() {
+    if(DbHasFailed()) {
+        throw new Exception('Database Failure!');
+    }
+}
+
+
+if(Login(1, 2)) {
+    //...
+} else {
+    //redirect to login page
+}
+
+
+try {
+    GetUser();
+} catch (Exception $e) {
+    //...gracefully exit
+}
+
+
 class MyException extends Exception {
     
 }
@@ -18,33 +47,4 @@ try {
     echo $e->message();
 } catch(Exception $e) {
     echo $e->message();
-}
-
-function operation($op, $x, $y) {
-    if(!in_array($op, array('add', 'sub', 'mul', 'div'))) {
-        throw new Exception('You must specify a valid operation!');
-    }
-    
-    //continue assuming $op is valid
-    $op($x, $y);
-}
-
-function add($x, $y) {
-    if(!(is_int($x) && is_int($y))) {
-        return false;
-    } else {
-        return $x + $y;
-    }
-}
-
-if(add('a', 2)) {
-    //continue
-} else {
-    //handle failure
-}
-
-try {
-    operation('log', 10, 3);
-} catch(Exception $e) {
-    //error reporting, handling, graceful exit of application
 }
